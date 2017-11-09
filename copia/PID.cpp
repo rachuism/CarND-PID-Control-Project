@@ -10,6 +10,9 @@ using namespace std;
 */
 int previous_cte=0; //Puede que empiece siendo cte
 int sum_cte=0;
+int p_error=0;
+int i_error=0;
+int d_error=0;
 int diff_cte=0;
 
 PID::PID() {
@@ -75,11 +78,11 @@ void PID::UpdateError(double cte) {
     cout << "Entro en el bucle" << endl;
 
     if (step==1){
-        p_error = cte;
+        previous_cte = cte;
     }
 
-    d_error = cte - p_error;
     p_error = cte;
+    d_error = cte - previous_cte;;
     i_error += cte;
 
     /*not sure
@@ -145,3 +148,4 @@ double PID::TotalError() {
 
     return 0.0;
 }
+
